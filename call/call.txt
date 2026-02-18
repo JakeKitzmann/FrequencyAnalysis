@@ -1,0 +1,1 @@
+/Volumes/ssd/FOVKyotoScans/resampled/r400.nii.gz /Volumes/ssd/FOVKyotoScans/mtf/r400.csv 384 273 384 286 383 312 252 369 262 243 363 470 232 376 1.0 0.2 0.5 test_out

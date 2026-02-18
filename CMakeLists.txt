@@ -13,25 +13,26 @@ find_package(ITK ${MINIMUM_ITK_VERSION} REQUIRED COMPONENTS
   ITKFFT
   ITKTransform
   ITKStatistics
+  ITKImageGrid
 )
+
+include(${ITK_USE_FILE})
 
 add_executable(FrequencyAnalysis
-  main.cxx
-  GetSlice.cxx
-  RecistROI.cxx
-  FFTCompatable.cxx
-  HannWindow.cxx
-  FFTShift.cxx
-  BandPassFilter.cxx
-  LowPassFilter.cxx
-  ImageEnergy.cxx
-  SignalNoise.cxx
-  ParseMTF.cxx
+  src/main.cxx
+  src/GetSlice.cxx
+  src/RecistROI.cxx
+  src/FFTCompatable.cxx
+  src/HannWindow.cxx
+  src/FFTShift.cxx
+  src/BandPassFilter.cxx
+  src/LowPassFilter.cxx
+  src/ImageEnergy.cxx
+  src/SignalNoise.cxx
+  src/ParseMTF.cxx
 )
 
-target_compile_features(FrequencyAnalysis PRIVATE cxx_std_17)
 
-# Modern ITK: prefer targets
-target_link_libraries(FrequencyAnalysis PRIVATE ${ITK_LIBRARIES})
+target_link_libraries(FrequencyAnalysis ${ITK_LIBRARIES})
 
 

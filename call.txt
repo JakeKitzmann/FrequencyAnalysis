@@ -1,1 +1,0 @@
-/Volumes/ssd/scans/scan.nii.gz /Volumes/ssd/scans/mtf.csv 1443 278 458 298 450 1095 219 442 922 221 445 1592 454 279 1.0 0.5 0.1 /Volumes/ssd/scans/
