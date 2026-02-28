@@ -28,7 +28,6 @@ add_executable(FrequencyAnalysis
   src/BandPassFilter.cxx
   src/LowPassFilter.cxx
   src/ImageEnergy.cxx
-  src/SignalNoise.cxx
   src/ParseMTF.cxx
 )
 

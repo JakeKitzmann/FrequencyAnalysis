@@ -4,82 +4,86 @@ set -euo pipefail
 CSV="${1:?Usage: $0 points.csv out_base_dir}"
 OUT_BASE="${2:?Usage: $0 points.csv out_base_dir}"
 
-RESAMPLED_DIR="/nfsscratch/jkitzmann/resampled"
-NIFTIS_DIR="/nfsscratch/jkitzmann/niftis"
-MTF_DIR="/nfsscratch/jkitzmann/mtf"
-
+BASE_DIR="$HOME/data/2-28"
+RESOLUTIONS=("1024" "512")
 EXT=".nii.gz"
 
-# Modulation cutoff pairs (low high)
 CUTOFFS=(
-  "0.2 0.5"
+  "0.1 0.2" "0.1 0.3" "0.1 0.4" "0.1 0.5" "0.1 0.6" "0.1 0.7" "0.1 0.8" "0.1 0.9"
+  "0.2 0.3" "0.2 0.4" "0.2 0.5" "0.2 0.6" "0.2 0.7" "0.2 0.8" "0.2 0.9"
+  "0.3 0.4" "0.3 0.5" "0.3 0.6" "0.3 0.7" "0.3 0.8" "0.3 0.9"
+  "0.4 0.5" "0.4 0.6" "0.4 0.7" "0.4 0.8" "0.4 0.9"
+  "0.5 0.6" "0.5 0.7" "0.5 0.8" "0.5 0.9"
+  "0.6 0.7" "0.6 0.8" "0.6 0.9"
+  "0.7 0.8" "0.7 0.9"
+  "0.8 0.9"
 )
 
 : > call.txt
 
-# NOTE: the "|| [[ -n ... ]]" makes sure we don't drop the last row if the file
-# doesn't end with a newline.
 tail -n +2 "$CSV" | while IFS=, read -r \
   Name slice \
   aX aY bX bY \
-  mtfSlice mtfX mtfY \
-  airSlice airX airY \
-  waterSlice waterX waterY \
   || [[ -n "${Name:-}" ]]
 do
-  # Clean up possible Windows CRLF and stray whitespace
   Name="${Name%$'\r'}"
   Name="${Name//[[:space:]]/}"
-  waterY="${waterY%$'\r'}"
-
-  # Skip empty lines
   [[ -z "${Name:-}" ]] && continue
 
-  # Map Name -> image path
-  if [[ "$Name" =~ ^r[0-9]+$ ]]; then
-    INPUT_IMAGE="${RESAMPLED_DIR}/${Name}${EXT}"
-  elif [[ "$Name" =~ ^[0-9]+$ ]]; then
-    INPUT_IMAGE="${NIFTIS_DIR}/${Name}${EXT}"
-  else
-    echo "ERROR: Unrecognized Name format: '$Name' (expected r### or ###)" >&2
-    exit 1
-  fi
+  NUM="${Name#r}"
 
-  [[ -f "$INPUT_IMAGE" ]] || { echo "ERROR: Missing image file: $INPUT_IMAGE" >&2; exit 1; }
+  for RES in "${RESOLUTIONS[@]}"; do
 
-  # Per-scan MTF CSV
-  MTF_CSV="${MTF_DIR}/${Name}.csv"
-  [[ -f "$MTF_CSV" ]] || { echo "ERROR: Missing MTF file: $MTF_CSV" >&2; exit 1; }
+    # ----- Image mapping -----
+    if [[ "$Name" =~ ^r[0-9]+$ ]]; then
+      INPUT_IMAGE="${BASE_DIR}/${RES}rs/${RES}_DFOV_${NUM}_resampled${EXT}"
+    elif [[ "$Name" =~ ^[0-9]+$ ]]; then
+      INPUT_IMAGE="${BASE_DIR}/${RES}/${RES}_DFOV_${NUM}${EXT}"
+    else
+      echo "ERROR: Unrecognized Name format: '$Name'" >&2
+      exit 1
+    fi
 
-  # For each cutoff pair, create a unique outdir and command
-  for pair in "${CUTOFFS[@]}"; do
-    read -r MOD_LOW MOD_HIGH <<< "$pair"
+    [[ -f "$INPUT_IMAGE" ]] || {
+      echo "ERROR: Missing image file: $INPUT_IMAGE" >&2
+      exit 1
+    }
 
-    # Make a filesystem-safe tag like "m01_06" for 0.1-0.6
-    tag="m${MOD_LOW/./}_${MOD_HIGH/./}"
+    # ----- MTF mapping -----
+    if [[ "$Name" =~ ^r[0-9]+$ ]]; then
+      MTF_CSV="${BASE_DIR}/passResults/mtf/${RES}/${RES}_DFOV_${NUM}_resampled.x.mtf_curve.csv"
+    else
+      MTF_CSV="${BASE_DIR}/passResults/mtf/${RES}/${RES}_DFOV_${NUM}.x.mtf_curve.csv"
+    fi
 
-    OUTDIR="${OUT_BASE}/${Name}/${tag}"
-    mkdir -p "$OUTDIR"
+    [[ -f "$MTF_CSV" ]] || {
+      echo "ERROR: Missing MTF file: $MTF_CSV" >&2
+      exit 1
+    }
 
-    # Build the command as an array so nothing gets split/wrapped
-    cmd=(
-      "../../03_tools/FrequencyAnalysis/build/FrequencyAnalysis"
-      "$INPUT_IMAGE"
-      "$MTF_CSV"
-      "$slice"
-      "$aX" "$aY" "$bX" "$bY"
-      "$mtfSlice" "$mtfX" "$mtfY"
-      "$airSlice" "$airX" "$airY"
-      "$waterSlice" "$waterX" "$waterY"
-      "1.0"
-      "$MOD_LOW"
-      "$MOD_HIGH"
-      "$OUTDIR"
-    )
+    for pair in "${CUTOFFS[@]}"; do
+      read -r MOD_LOW MOD_HIGH <<< "$pair"
+      tag="m${MOD_LOW/./}_${MOD_HIGH/./}"
 
-    # Write exactly ONE runnable line
-    printf '%q ' "${cmd[@]}" >> call.txt
-    printf '\n' >> call.txt
+      OUTDIR="${OUT_BASE}/${RES}/${Name}/${tag}"
+      mkdir -p "$OUTDIR"
+
+      cmd=(
+        FrequencyAnalysis
+        "$INPUT_IMAGE"
+        "$MTF_CSV"
+        "$slice"
+        "$aX" "$aY" "$bX" "$bY"
+        "1.0"
+        "$MOD_LOW"
+        "$MOD_HIGH"
+        "$OUTDIR"
+      )
+
+      printf '%q ' "${cmd[@]}" >> call.txt
+      printf '\n' >> call.txt
+    done
+
   done
 done
 

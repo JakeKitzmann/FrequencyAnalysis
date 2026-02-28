@@ -13,7 +13,6 @@
 #include "BandPassFilter.h"
 #include "LowPassFilter.h"
 #include "ImageEnergy.h"
-#include "SignalNoise.h"
 #include "ParseMTF.h"
 
 // ITK
@@ -59,14 +58,11 @@ void WriteImageT(typename TImage::Pointer img, const std::string& filename)
 int main(int argc, char * argv []){
 
     // arg check 
-    if (argc != 21) {
+    if (argc != 12) {
         std::cerr
         << "Usage:\n  " << argv[0]
         << " <inputImagePath> <inputMTFCSVPath> <roiAxialSlice>"
         << " <recistAX> <recistAY> <recistBX> <recistBY>"
-        << " <mtfSliceNum> <mtfX> <mtfY>"
-        << " <airSliceNum> <airX> <airY>"
-        << " <waterSliceNum> <waterX> <waterY>"
         << " <roiMultiplier> <lowMod> <highMod> <outputPath>\n"
         << "Got argc=" << argc << "\n";
         return EXIT_FAILURE;
@@ -83,19 +79,10 @@ int main(int argc, char * argv []){
     const int aY = std::stoi(argv[5], &pos);
     const int bX = std::stoi(argv[6], &pos);
     const int bY = std::stoi(argv[7], &pos);
-    const int mtfSliceNum = std::stoi(argv[8], &pos);
-    const int mtfX = std::stoi(argv[9], &pos);
-    const int mtfY = std::stoi(argv[10], &pos);
-    const int airSliceNum = std::stoi(argv[11], &pos);
-    const int airX = std::stoi(argv[12], &pos);
-    const int airY = std::stoi(argv[13], &pos);
-    const int waterSliceNum = std::stoi(argv[14], &pos);
-    const int waterX = std::stoi(argv[15], &pos);
-    const int waterY = std::stoi(argv[16], &pos);
-    const double roiMult = std::stod(argv[17], &pos);
-    double modLow = std::stod(argv[18], &pos);
-    double modHigh = std::stod(argv[19], &pos);
-    const std::string outPath = argv[20];
+    const double roiMult = std::stod(argv[8], &pos);
+    double modLow = std::stod(argv[9], &pos);
+    double modHigh = std::stod(argv[10], &pos);
+    const std::string outPath = argv[11];
 
     fs::path outDir(outPath);
     std::error_code ec;
@@ -215,34 +202,8 @@ int main(int argc, char * argv []){
     auto logFilter = LogFilter::New();
     logFilter->SetInput(addFilter->GetOutput());
 
-    // signal noise ratios
-    const auto spacingDbg = f->GetSpacing();
-    const double dxDbg = spacingDbg[0];
-    const double dyDbg = spacingDbg[1];
-
-    const double snrSizeVxl = snrSizeMm / dxDbg;
-
-    GetSlice getMtfSlice(image, mtfSliceNum);
-    auto mtfSlice = getMtfSlice.execute();
-    SignalNoise mtfSignalNosie(mtfSlice, mtfX, mtfY, snrSizeVxl);
-    auto mtfRoi = mtfSignalNosie.getROI();
-    double mtfSnr = mtfSignalNosie.execute();
-
-    GetSlice getAirSlice(image, airSliceNum);
-    auto airSlice = getAirSlice.execute();
-    SignalNoise airSignalNoise(airSlice, airX, airY, snrSizeVxl);
-    auto airRoi = airSignalNoise.getROI();
-    double airSnr = airSignalNoise.execute();
-
-    GetSlice getWaterSlice(image, waterSliceNum);
-    auto waterSlice = getWaterSlice.execute();
-    SignalNoise waterSignalNoise(waterSlice, waterX, waterY, snrSizeVxl);
-    auto waterRoi = waterSignalNoise.getROI();
-    double waterSnr = waterSignalNoise.execute();
-
-    // fourier debug
-    const double fxMax = 0.5 / dxDbg;
-    const double fyMax = 0.5 / dyDbg; 
+	const double fxMax = 0.5 / f->GetSpacing()[0];
+    const double fyMax = 0.5 / f->GetSpacing()[1]; 
 
     // output results
     std::ofstream out((outDir / "stats.csv").string());
@@ -251,7 +212,7 @@ int main(int argc, char * argv []){
         return 1;
     }
 
-    out << "name,slice,fxmax,fymax,ax,ay,bx,by,size,bpe,lpe,ef,mtfSlice,mtfX,mtfY,mtfSnr,airSlice,airX,airY,airSnr,waterSlice,waterX,waterY,waterSnr" << std::endl;
+    out << "name,slice,fxmax,fymax,ax,ay,bx,by,size,bpe,lpe,ef" << std::endl;
 
     const auto finalSz = f->GetLargestPossibleRegion().GetSize();
     const long outSize = static_cast<long>(finalSz[1]);
@@ -266,10 +227,7 @@ int main(int argc, char * argv []){
     << bandpassE << ","
     << lowpassE << ","
     << energyFraction << ","
-    << mtfSliceNum << "," << mtfX << "," << mtfY << "," << mtfSnr << ","
-    << airSliceNum << "," << airX << "," << airY << "," << airSnr << ","
-    << waterSliceNum << "," << waterX << "," << waterY << "," << waterSnr << ","
-    << std::endl;
+	<< std::endl;
 
     WriteImageT<Float2D>(logFilter->GetOutput(), (outDir / "F.nii.gz").string());
     WriteImageT<Float2D>(bandpass,  (outDir / "filter_bp.nii.gz").string());
@@ -278,9 +236,6 @@ int main(int argc, char * argv []){
     WriteImageT<Complex2D>(FLowpassFiltered, (outDir / "frequency_lp.nii.gz").string());
     WriteImageT<Float2D>(fBandpassFiltered, (outDir / "image_bp.nii.gz").string());
     WriteImageT<Float2D>(fLowpassFiltered, (outDir / "image_lp.nii.gz").string());
-    WriteImageT<Float2D>(mtfRoi, (outDir / "mtfRoi.nii.gz").string());
-    WriteImageT<Float2D>(airRoi, (outDir / "airRoi.nii.gz").string());
-    WriteImageT<Float2D>(waterRoi, (outDir / "waterRoi.nii.gz").string());
 
     std::cout << "Finished." << std::endl;
 
