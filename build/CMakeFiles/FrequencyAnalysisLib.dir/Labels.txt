@@ -1,0 +1,14 @@
+# Target labels
+ FrequencyAnalysis
+# Source files and their labels
+/home/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h
+/home/jkitzmann/FrequencyAnalysis/src/RecistROI.cxx
+/home/jkitzmann/FrequencyAnalysis/src/FFTCompatable.cxx
+/home/jkitzmann/FrequencyAnalysis/src/HannWindow.cxx
+/home/jkitzmann/FrequencyAnalysis/src/FFTShift.cxx
+/home/jkitzmann/FrequencyAnalysis/src/BandPassFilter.cxx
+/home/jkitzmann/FrequencyAnalysis/src/LowPassFilter.cxx
+/home/jkitzmann/FrequencyAnalysis/src/ImageEnergy.cxx
+/home/jkitzmann/FrequencyAnalysis/src/ParseMTF.cxx
+/home/jkitzmann/FrequencyAnalysis/FrequencyAnalysis.cxx
+/home/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h.rule

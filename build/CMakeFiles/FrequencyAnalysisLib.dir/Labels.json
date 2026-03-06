@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h"
+		},
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/src/RecistROI.cxx"
+		},
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/src/FFTCompatable.cxx"
+		},
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/src/HannWindow.cxx"
+		},
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/src/FFTShift.cxx"
+		},
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/src/BandPassFilter.cxx"
+		},
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/src/LowPassFilter.cxx"
+		},
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/src/ImageEnergy.cxx"
+		},
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/src/ParseMTF.cxx"
+		},
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/FrequencyAnalysis.cxx"
+		},
+		{
+			"file" : "/home/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"FrequencyAnalysis"
+		],
+		"name" : "FrequencyAnalysisLib"
+	}
+}

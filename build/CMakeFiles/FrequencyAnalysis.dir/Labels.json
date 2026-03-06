@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/jkitzmann/SlicerExecutionModel/CMake/SEMCommandLineLibraryWrapper.cxx"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"FrequencyAnalysis"
+		],
+		"name" : "FrequencyAnalysis"
+	}
+}
