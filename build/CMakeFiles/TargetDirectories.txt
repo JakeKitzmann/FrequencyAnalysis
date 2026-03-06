@@ -1,3 +1,0 @@
-/home/jkitzmann/FrequencyAnalysis/build/CMakeFiles/FrequencyAnalysis.dir
-/home/jkitzmann/FrequencyAnalysis/build/CMakeFiles/edit_cache.dir
-/home/jkitzmann/FrequencyAnalysis/build/CMakeFiles/rebuild_cache.dir
