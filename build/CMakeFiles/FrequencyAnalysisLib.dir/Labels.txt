@@ -1,14 +1,14 @@
 # Target labels
  FrequencyAnalysis
 # Source files and their labels
-/home/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h
-/home/jkitzmann/FrequencyAnalysis/src/RecistROI.cxx
-/home/jkitzmann/FrequencyAnalysis/src/FFTCompatable.cxx
-/home/jkitzmann/FrequencyAnalysis/src/HannWindow.cxx
-/home/jkitzmann/FrequencyAnalysis/src/FFTShift.cxx
-/home/jkitzmann/FrequencyAnalysis/src/BandPassFilter.cxx
-/home/jkitzmann/FrequencyAnalysis/src/LowPassFilter.cxx
-/home/jkitzmann/FrequencyAnalysis/src/ImageEnergy.cxx
-/home/jkitzmann/FrequencyAnalysis/src/ParseMTF.cxx
-/home/jkitzmann/FrequencyAnalysis/FrequencyAnalysis.cxx
-/home/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h.rule
+/Users/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h
+/Users/jkitzmann/FrequencyAnalysis/src/RecistROI.cxx
+/Users/jkitzmann/FrequencyAnalysis/src/FFTCompatable.cxx
+/Users/jkitzmann/FrequencyAnalysis/src/HannWindow.cxx
+/Users/jkitzmann/FrequencyAnalysis/src/FFTShift.cxx
+/Users/jkitzmann/FrequencyAnalysis/src/BandPassFilter.cxx
+/Users/jkitzmann/FrequencyAnalysis/src/LowPassFilter.cxx
+/Users/jkitzmann/FrequencyAnalysis/src/ImageEnergy.cxx
+/Users/jkitzmann/FrequencyAnalysis/src/ParseMTF.cxx
+/Users/jkitzmann/FrequencyAnalysis/FrequencyAnalysis.cxx
+/Users/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h.rule

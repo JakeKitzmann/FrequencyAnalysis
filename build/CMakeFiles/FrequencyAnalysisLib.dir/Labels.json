@@ -2,37 +2,37 @@
 	"sources" : 
 	[
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h"
 		},
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/src/RecistROI.cxx"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/src/RecistROI.cxx"
 		},
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/src/FFTCompatable.cxx"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/src/FFTCompatable.cxx"
 		},
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/src/HannWindow.cxx"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/src/HannWindow.cxx"
 		},
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/src/FFTShift.cxx"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/src/FFTShift.cxx"
 		},
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/src/BandPassFilter.cxx"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/src/BandPassFilter.cxx"
 		},
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/src/LowPassFilter.cxx"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/src/LowPassFilter.cxx"
 		},
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/src/ImageEnergy.cxx"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/src/ImageEnergy.cxx"
 		},
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/src/ParseMTF.cxx"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/src/ParseMTF.cxx"
 		},
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/FrequencyAnalysis.cxx"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/FrequencyAnalysis.cxx"
 		},
 		{
-			"file" : "/home/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h.rule"
+			"file" : "/Users/jkitzmann/FrequencyAnalysis/build/FrequencyAnalysisCLP.h.rule"
 		}
 	],
 	"target" : 

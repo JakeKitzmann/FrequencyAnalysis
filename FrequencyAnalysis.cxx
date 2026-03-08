@@ -249,6 +249,18 @@ int main(int argc, char * argv []){
     << energyFraction << ","
 	<< std::endl;
 
+    std::cout << name << ","
+    << slice << ","
+    << fxMax << "," << fyMax << ","
+    << aR << "," << aA << ","
+    << aIdx[0] << "," << aIdx[1] << ","
+    << bR << "," << bA << ","
+    << bIdx[0] << "," << bIdx[1] << ","
+    << outSize << ","
+    << bandpassE << ","
+    << lowpassE << ","
+    << energyFraction << ","
+	<< std::endl;
     WriteImageT<Float2D>(logFilter->GetOutput(), (outDir / "F.nii.gz").string());
     WriteImageT<Float2D>(bandpass,  (outDir / "filter_bp.nii.gz").string());
     WriteImageT<Float2D>(lowpass,   (outDir / "filter_lp.nii.gz").string());
@@ -257,7 +269,6 @@ int main(int argc, char * argv []){
     WriteImageT<Float2D>(fBandpassFiltered, (outDir / "image_bp.nii.gz").string());
     WriteImageT<Float2D>(fLowpassFiltered, (outDir / "image_lp.nii.gz").string());
 
-    std::cout << "Finished." << std::endl;
 
     return EXIT_SUCCESS;
 }

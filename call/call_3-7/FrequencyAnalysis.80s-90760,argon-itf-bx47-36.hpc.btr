@@ -1,0 +1,13 @@
+
+FrequencyAnalysis:90760 terminated with signal 6 at PC=2afd1ba07387 SP=7ffd34147928.  Backtrace:
+/lib64/libc.so.6(gsignal+0x37)[0x2afd1ba07387]
+/lib64/libc.so.6(abort+0x148)[0x2afd1ba08a78]
+/opt/ssoft/apps/2021.1/linux-centos7-x86_64/gcc-4.8.5/gcc-9.3.0-hcdyg64/lib64/libstdc++.so.6(+0x99383)[0x2afd1b477383]
+/opt/ssoft/apps/2021.1/linux-centos7-x86_64/gcc-4.8.5/gcc-9.3.0-hcdyg64/lib64/libstdc++.so.6(+0xa4da6)[0x2afd1b482da6]
+/opt/ssoft/apps/2021.1/linux-centos7-x86_64/gcc-4.8.5/gcc-9.3.0-hcdyg64/lib64/libstdc++.so.6(+0xa4e11)[0x2afd1b482e11]
+/opt/ssoft/apps/2021.1/linux-centos7-x86_64/gcc-4.8.5/gcc-9.3.0-hcdyg64/lib64/libstdc++.so.6(+0xa5065)[0x2afd1b483065]
+/Users/jkitzmann/FrequencyAnalysis/build/lib/libFrequencyAnalysisLib.so(_ZN8ParseMTF7executeEv+0x33c)[0x2afd14de281a]
+/Users/jkitzmann/FrequencyAnalysis/build/lib/libFrequencyAnalysisLib.so(ModuleEntryPoint+0x36bd)[0x2afd14de874d]
+FrequencyAnalysis[0x4012e2]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x2afd1b9f3555]
+FrequencyAnalysis[0x401219]

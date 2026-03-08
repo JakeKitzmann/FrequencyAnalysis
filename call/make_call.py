@@ -6,7 +6,7 @@ from pathlib import Path
 from itertools import combinations
 
 if len(sys.argv) != 8:
-    print(f"Usage: {sys.argv[0]} input_files.csv slice aR aA bR bA out_dir")
+    print(f'Usage: {sys.argv[0]} input_files.csv slice aR aA bR bA out_dir')
     sys.exit(1)
 
 csv_file = sys.argv[1]

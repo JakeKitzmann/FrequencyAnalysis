@@ -1,0 +1,2 @@
+Running task 7
+FrequencyAnalysis --inputImageName /home/jkitzmann/data/FOVData/3-4/1024/1024_DFOV_200.nii.gz --outputDirectory /Users/jkitzmann/frequency_output/3-7/0.1_0.8/1024_DFOV_200 --inputCSVName /home/jkitzmann/data/FOVData/3-4/1024/1024_DFOV_200.x.mtf_curve.csv --slice 1039 --aR 64.2 --aA 185.8 --bR 59.6 --bA 188.5 --modLow 0.1 --modHigh 0.8

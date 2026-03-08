@@ -1,7 +1,16 @@
 cmake_minimum_required(VERSION 3.20)
 project(FrequencyAnalysis LANGUAGES CXX)
 
-# sem
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON
+
+)# sem
+set(BUILD_TESTING OFF)
+
+# Dummy GTest targets to satisfy SEM export
+add_library(GTest::GTest INTERFACE IMPORTED)
+add_library(GTest::Main INTERFACE IMPORTED)
+
 find_package(SlicerExecutionModel REQUIRED GenerateCLP)
 include(${GenerateCLP_USE_FILE})
 include(${SlicerExecutionModel_USE_FILE})
@@ -32,4 +41,6 @@ SEMMacroBuildCLI(
 
         TARGET_LIBRARIES
         ${ITK_LIBRARIES}
+        png
+        z
 )
