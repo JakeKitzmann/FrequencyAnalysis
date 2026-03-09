@@ -58,7 +58,13 @@ int main(int argc, char * argv []){
         return EXIT_FAILURE;
     }
 
-
+    std::cout << "slice: " << std::endl;
+    std::cout << "aR (mult by -1): " << aR << std::endl;
+    std::cout << "aA (mult by -1): " << aA << std::endl;
+    std::cout << "bR (mult by -1): " << bR << std::endl;
+    std::cout << "bA (mult by -1): " << bA << std::endl;
+    std::cout << "roiMult: " << roiMult << std::endl;
+    
     // read MTF for frequencies
     ParseMTF parseMTF(modLow, modHigh, inputCSVName);
     std::array<double, 2> frequencies = parseMTF.execute();
@@ -261,6 +267,7 @@ int main(int argc, char * argv []){
     << lowpassE << ","
     << energyFraction << ","
 	<< std::endl;
+
     WriteImageT<Float2D>(logFilter->GetOutput(), (outDir / "F.nii.gz").string());
     WriteImageT<Float2D>(bandpass,  (outDir / "filter_bp.nii.gz").string());
     WriteImageT<Float2D>(lowpass,   (outDir / "filter_lp.nii.gz").string());

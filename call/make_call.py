@@ -48,7 +48,8 @@ with open(call_file, "w") as out:
                     f"--slice {slice_idx} "
                     f"--aR {aR} --aA {aA} "
                     f"--bR {bR} --bA {bA} "
-                    f"--modLow {modLow} --modHigh {modHigh}"
+                    f"--modLow {modLow} --modHigh {modHigh} "
+                    f"--roiMult 1.0"
                 )
                 out.write(cmd + "\n")
 
