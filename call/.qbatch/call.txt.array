@@ -1,3 +1,27 @@
+#!/bin/sh
+#$ -S /bin/sh
+#$ -pe smp 20
+#$ -j y
+#$ -o /old_Users/jkitzmann/FrequencyAnalysis/call/logs
+#$ -wd /old_Users/jkitzmann/FrequencyAnalysis/call
+#$ -N call.txt
+#$ -l mem_free=16G
+#$ -q all.q
+#$ -t 1-2016
+#$ 
+#$ 
+#$ 
+#$ 
+#$ 
+
+
+ARRAY_IND=$SGE_TASK_ID
+
+command -v parallel > /dev/null 2>&1 || { echo "GNU parallel not found in job environment. Exiting."; exit 1; }
+CHUNK_SIZE=1
+CORES=20
+export THREADS_PER_COMMAND=1
+sed -n "$(( (${ARRAY_IND} - 1) * ${CHUNK_SIZE} + 1 )),+$(( ${CHUNK_SIZE} - 1 ))p" << EOF | parallel -j${CORES} --tag --line-buffer --compress
 FrequencyAnalysis --inputImageName /nfsscratch/jkitzmann/data/3-4/1024/1024_DFOV_200.nii.gz --outputDirectory /Users/jkitzmann/frequency_output/3-10/0.1_0.2/1024_DFOV_200 --inputCSVName /nfsscratch/jkitzmann/data/3-4/1024/1024_DFOV_200.x.mtf_curve.csv --slice 1039 --aR 64.2 --aA 185.8 --bR 59.6 --bA 188.5 --modLow 0.1 --modHigh 0.2 --roiMult 1.0
 FrequencyAnalysis --inputImageName /nfsscratch/jkitzmann/data/3-4/1024/1024_DFOV_200.nii.gz --outputDirectory /Users/jkitzmann/frequency_output/3-10/0.1_0.3/1024_DFOV_200 --inputCSVName /nfsscratch/jkitzmann/data/3-4/1024/1024_DFOV_200.x.mtf_curve.csv --slice 1039 --aR 64.2 --aA 185.8 --bR 59.6 --bA 188.5 --modLow 0.1 --modHigh 0.3 --roiMult 1.0
 FrequencyAnalysis --inputImageName /nfsscratch/jkitzmann/data/3-4/1024/1024_DFOV_200.nii.gz --outputDirectory /Users/jkitzmann/frequency_output/3-10/0.1_0.4/1024_DFOV_200 --inputCSVName /nfsscratch/jkitzmann/data/3-4/1024/1024_DFOV_200.x.mtf_curve.csv --slice 1039 --aR 64.2 --aA 185.8 --bR 59.6 --bA 188.5 --modLow 0.1 --modHigh 0.4 --roiMult 1.0
@@ -2014,3 +2038,5 @@ FrequencyAnalysis --inputImageName /nfsscratch/jkitzmann/data/3-4/512IR3rs/512_D
 FrequencyAnalysis --inputImageName /nfsscratch/jkitzmann/data/3-4/512IR3rs/512_DFOV_500_IR3_resampled.nii.gz --outputDirectory /Users/jkitzmann/frequency_output/3-10/0.7_0.8/512_DFOV_500_IR3_resampled --inputCSVName /nfsscratch/jkitzmann/data/3-4/512IR3rs/512_DFOV_500_IR3_resampled.x.mtf_curve.csv --slice 1039 --aR 64.2 --aA 185.8 --bR 59.6 --bA 188.5 --modLow 0.7 --modHigh 0.8 --roiMult 1.0
 FrequencyAnalysis --inputImageName /nfsscratch/jkitzmann/data/3-4/512IR3rs/512_DFOV_500_IR3_resampled.nii.gz --outputDirectory /Users/jkitzmann/frequency_output/3-10/0.7_0.9/512_DFOV_500_IR3_resampled --inputCSVName /nfsscratch/jkitzmann/data/3-4/512IR3rs/512_DFOV_500_IR3_resampled.x.mtf_curve.csv --slice 1039 --aR 64.2 --aA 185.8 --bR 59.6 --bA 188.5 --modLow 0.7 --modHigh 0.9 --roiMult 1.0
 FrequencyAnalysis --inputImageName /nfsscratch/jkitzmann/data/3-4/512IR3rs/512_DFOV_500_IR3_resampled.nii.gz --outputDirectory /Users/jkitzmann/frequency_output/3-10/0.8_0.9/512_DFOV_500_IR3_resampled --inputCSVName /nfsscratch/jkitzmann/data/3-4/512IR3rs/512_DFOV_500_IR3_resampled.x.mtf_curve.csv --slice 1039 --aR 64.2 --aA 185.8 --bR 59.6 --bA 188.5 --modLow 0.8 --modHigh 0.9 --roiMult 1.0
+
+EOF
