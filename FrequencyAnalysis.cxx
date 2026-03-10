@@ -58,7 +58,7 @@ int main(int argc, char * argv []){
         return EXIT_FAILURE;
     }
 
-    std::cout << "slice: " << std::endl;
+    std::cout << "slice: " << slice << std::endl;
     std::cout << "aR (mult by -1): " << aR << std::endl;
     std::cout << "aA (mult by -1): " << aA << std::endl;
     std::cout << "bR (mult by -1): " << bR << std::endl;
@@ -74,36 +74,32 @@ int main(int argc, char * argv []){
 
     // "read" image (we're not actually reading because we only need one slice)
     using ReaderType = itk::ImageFileReader<ImageType>;
+
     auto reader = ReaderType::New();
     reader->SetFileName(inputImageName);
 
-    // snag the metadata
     reader->UpdateOutputInformation();
-    ImageType::RegionType fullRegion = reader->GetOutput()->GetLargestPossibleRegion();
-    ImageType::IndexType start = fullRegion.GetIndex();
-    ImageType::SizeType size = fullRegion.GetSize();
 
-    // update region to only use axial slice -- axial size of 0 to make 2D
-    unsigned int sliceIndex = slice;
-    start[2] = sliceIndex;
+    auto region = reader->GetOutput()->GetLargestPossibleRegion();
+    auto size = region.GetSize();
+    auto start = region.GetIndex();
+
+    start[2] = slice;
     size[2] = 0;
 
-    // set region
     ImageType::RegionType desiredRegion;
     desiredRegion.SetIndex(start);
     desiredRegion.SetSize(size);
-    reader->GetOutput()->SetRequestedRegion(desiredRegion);
-    reader->Update();
 
-    // convert that shit to 2D
     using ExtractFilterType = itk::ExtractImageFilter<ImageType, SliceType>;
     auto extractor = ExtractFilterType::New();
     extractor->SetInput(reader->GetOutput());
     extractor->SetExtractionRegion(desiredRegion);
     extractor->SetDirectionCollapseToSubmatrix();
-    extractor->Update();
 
-    auto sliceImage = extractor->GetOutput();
+    extractor->Update();
+    SliceType::Pointer sliceImage = extractor->GetOutput();
+    sliceImage->DisconnectPipeline();
 
     // convert to slice index
     // note that we don't need S because it's a 2D image now
@@ -252,7 +248,7 @@ int main(int argc, char * argv []){
     << outSize << ","
     << bandpassE << ","
     << lowpassE << ","
-    << energyFraction << ","
+    << energyFraction
 	<< std::endl;
 
     std::cout << name << ","
@@ -265,7 +261,7 @@ int main(int argc, char * argv []){
     << outSize << ","
     << bandpassE << ","
     << lowpassE << ","
-    << energyFraction << ","
+    << energyFraction
 	<< std::endl;
 
     WriteImageT<Float2D>(logFilter->GetOutput(), (outDir / "F.nii.gz").string());

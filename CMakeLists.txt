@@ -2,12 +2,12 @@ cmake_minimum_required(VERSION 3.20)
 project(FrequencyAnalysis LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-)# sem
+# sem
 set(BUILD_TESTING OFF)
 
-# Dummy GTest targets to satisfy SEM export
+# dummy GTest exports bc argon is wierd
 add_library(GTest::GTest INTERFACE IMPORTED)
 add_library(GTest::Main INTERFACE IMPORTED)
 
