@@ -44,5 +44,5 @@ Executable located at build/bin/FrequencyAnalysis
 
 This tool is completely free to use and publish with. If this aided your publication, please cite
 
-Jacob J. Kitzmann, The University of Iowa College of Engineering
+Jacob J. Kitzmann, BSE, The University of Iowa College of Engineering
 (add in paper citation when we get published)
