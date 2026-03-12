@@ -1,8 +1,0 @@
-/Users/jkitzmann/FrequencyAnalysis/build/CMakeFiles/install/strip.dir
-/Users/jkitzmann/FrequencyAnalysis/build/CMakeFiles/install/local.dir
-/Users/jkitzmann/FrequencyAnalysis/build/CMakeFiles/rebuild_cache.dir
-/Users/jkitzmann/FrequencyAnalysis/build/CMakeFiles/FrequencyAnalysis.dir
-/Users/jkitzmann/FrequencyAnalysis/build/CMakeFiles/FrequencyAnalysisLib.dir
-/Users/jkitzmann/FrequencyAnalysis/build/CMakeFiles/edit_cache.dir
-/Users/jkitzmann/FrequencyAnalysis/build/CMakeFiles/install.dir
-/Users/jkitzmann/FrequencyAnalysis/build/CMakeFiles/list_install_components.dir

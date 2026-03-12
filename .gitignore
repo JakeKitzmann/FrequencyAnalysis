@@ -1,5 +1,5 @@
-build/*
-call/logs/*
+build/
+call/logs/
 *.nii.gz
 *.nrrd
 *.dcm
