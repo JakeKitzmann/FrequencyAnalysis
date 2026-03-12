@@ -1,0 +1,2 @@
+name,slice,fxmax,fymax,aR,aA,aI,aJ,bR,bA,bI,bJ,size,bpe,lpe,ef
+512_DFOV_250_IR3_resampled.nii.gz,1039,0.512,0.512,64.2,185.8,53,109,59.6,188.5,57,106,10,1.5843e+07,3.47843e+08,0.0435622
