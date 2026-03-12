@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(BUILD_TESTING OFF)
 
 # dummy GTest exports bc argon is wierd
-add_library(GTest::GTest INTERFACE IMPORTED)
-add_library(GTest::Main INTERFACE IMPORTED)
+# add_library(GTest::GTest INTERFACE IMPORTED)
+# add_library(GTest::Main INTERFACE IMPORTED)
 
 find_package(SlicerExecutionModel REQUIRED GenerateCLP)
 include(${GenerateCLP_USE_FILE})
@@ -41,6 +41,6 @@ SEMMacroBuildCLI(
 
         TARGET_LIBRARIES
         ${ITK_LIBRARIES}
-        png
-        z
+#        png
+#        z
 )
