@@ -19,7 +19,7 @@ C++ 17 Compiler
 ## Setup 
 
 git clone https://github.com/username/ResampleFromImage
-cd ResampleFromImage
+cd ResampleFromImage \n
 mkdir build
 cd build
 cmake ..
