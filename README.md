@@ -4,25 +4,53 @@ A tool for extracting spatial frequency information from lung tissue, airways, a
 medical image modalities.
 
 ## Args:
-FrequencyAnalysis --modHigh <float> --modLow <float> --roiMult <float> --slice <int> --bA <float>
-  --bR <float> --aA <float> --aR <float> --inputCSVName <std::string> --outputDirectory <std::string>
-  --inputImageName <std::string>
+FrequencyAnalysis
+
+--modHigh <float>
+
+--modLow <float> 
+
+--roiMult <float> 
+
+--slice <int> 
+
+--bA <float>
+ 
+--bR <float> 
+  
+--aA <float> 
+
+--aR <float> 
+
+--inputCSVName <std::string> 
+
+--outputDirectory <std::string>
+  
+--inputImageName <std::string>
 
 
 ## Requirements
 
 CMake >= 3.17
+
 ITK >= 5.0
+
 SlicerExecutionModel
+
 C++ 17 Compiler
 
 ## Setup 
 
 git clone https://github.com/username/ResampleFromImage
-cd ResampleFromImage \n
+
+cd ResampleFromImage
+
 mkdir build
+
 cd build
+
 cmake ..
+
 make
 
 ### Note on CMakeLists.txt
@@ -31,9 +59,13 @@ Due to use in UIowa's Argon HPC cluster, lines for ignoring GTest, and some incl
 CMakeLists.txt
 
 To run you may need to comment out:
+
 add_library(GTest::GTest INTERFACE IMPORTED)
+
 add_library(GTest::Main INTERFACE IMPORTED)
+
 png
+
 z
 
 ## Executable
