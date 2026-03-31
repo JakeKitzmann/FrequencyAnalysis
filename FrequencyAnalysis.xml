@@ -60,6 +60,7 @@
         <float>
             <longflag>roiMult</longflag>
             <label>RECIST distance multiplier for ROI calculation</label>
+            <default>1.0</default>
         </float>
     </parameters>
 
@@ -69,12 +70,12 @@
         <float>
             <longflag>modLow</longflag>
             <label>low modulation</label>
-            <default>0.0</default>
+            <default>0.1</default>
         </float>
         <float>
             <longflag>modHigh</longflag>
             <label>high modulation</label>
-            <default>0.0</default>
+            <default>0.6</default>
         </float>
 
     </parameters>

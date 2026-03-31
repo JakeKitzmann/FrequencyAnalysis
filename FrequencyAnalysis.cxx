@@ -91,6 +91,13 @@ int main(int argc, char * argv []){
     if (modLow < 0 || modLow > 1.0 || modHigh < 0.0 || modHigh > 1.0)
     {
         std::cout << "ERROR: Invalid modulation" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    if(roiMult < 0.0)
+    {
+        std::cout << "ERROR: Invalid roiMult" << std::endl;
+        return EXIT_FAILURE; 
     }
 
 
