@@ -17,7 +17,7 @@
             <channel>input</channel>
             <description>Input volume to be analyzed</description>
         </image>
-        <image>
+        <string>
             <longflag>outputDirectory</longflag>
             <label>Output Directory</label>
             <channel>output</channel>
