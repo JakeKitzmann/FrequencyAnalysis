@@ -20,9 +20,8 @@
         <string>
             <longflag>outputDirectory</longflag>
             <label>Output Directory</label>
-            <channel>output</channel>
             <description>directory for output frequency, mask images</description>
-        </image>
+        </string>
         <string>
             <longflag>inputCSVName</longflag>
             <label>path for input MTF csv</label>
