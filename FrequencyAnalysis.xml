@@ -50,7 +50,7 @@
         </float>
         <integer>
             <longflag>slice</longflag>
-            <label>Axial slice coordinate of airway recist diameter points.</label>
+            <label>Axial slice coordinate of airway recist diameter points</label>
         </integer>
     </parameters>
 
@@ -69,12 +69,12 @@
         <description>Modulations desired for analysis band</description>
         <float>
             <longflag>modLow</longflag>
-            <label>low modulation</label>
+            <label>Low modulation</label>
             <default>0.1</default>
         </float>
         <float>
             <longflag>modHigh</longflag>
-            <label>high modulation</label>
+            <label>High modulation</label>
             <default>0.6</default>
         </float>
 
