@@ -82,11 +82,6 @@ int main(int argc, char * argv []){
 
     // XML arg validation
     // physical point to index already handled by bool later
-    if (slice < 0 || slice > size[2])
-    {
-        std::cout << "ERROR: Slice not within image" << std::endl;
-        return EXIT_FAILURE;
-    }
 
     if (modLow < 0 || modLow > 1.0 || modHigh < 0.0 || modHigh > 1.0)
     {

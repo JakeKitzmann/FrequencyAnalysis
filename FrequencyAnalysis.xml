@@ -34,22 +34,27 @@
         <float>
             <longflag>aR</longflag>
             <label>Right coordinate of first recist point</label>
+            <default>68.4</default>
         </float>
         <float>
             <longflag>aA</longflag>
             <label>Anterior coordinate of first recist point</label>
+            <default>142.3</default>
         </float>
         <float>
             <longflag>bR</longflag>
             <label>Right coordinate of second recist point</label>
+            <default>65.7</default>
         </float>
         <float>
             <longflag>bA</longflag>
             <label>Anterior coordinate of second recist point</label>
+            <default>137.9</default>
         </float>
         <integer>
             <longflag>slice</longflag>
             <label>Axial slice coordinate of airway recist diameter points</label>
+            <default>961</default>
         </integer>
     </parameters>
 
