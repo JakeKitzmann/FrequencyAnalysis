@@ -260,14 +260,11 @@ int main(int argc, char * argv []){
     << energyFraction
 	<< std::endl;
 
-    WriteImageT<Float2D>(logFilter->GetOutput(), (outDir / "F.nii.gz").string());
-    WriteImageT<Float2D>(bandpass,  (outDir / "filter_bp.nii.gz").string());
-    WriteImageT<Float2D>(lowpass,   (outDir / "filter_lp.nii.gz").string());
-    WriteImageT<Complex2D>(FBandpassFiltered, (outDir / "frequency_bp.nii.gz").string());
-    WriteImageT<Complex2D>(FLowpassFiltered, (outDir / "frequency_lp.nii.gz").string());
-    WriteImageT<Float2D>(fBandpassFiltered, (outDir / "image_bp.nii.gz").string());
-    WriteImageT<Float2D>(fLowpassFiltered, (outDir / "image_lp.nii.gz").string());
-
+    WriteImageT<Float2D>(logFilter->GetOutput(), outputF);
+    WriteImageT<Float2D>(bandpass,               outputFilterBP);
+    WriteImageT<Float2D>(lowpass,                outputFilterLP);
+    WriteImageT<Float2D>(fBandpassFiltered,      outputImageBP);
+    WriteImageT<Float2D>(fLowpassFiltered,       outputImageLP);
 
     return EXIT_SUCCESS;
 }

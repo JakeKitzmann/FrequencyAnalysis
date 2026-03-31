@@ -21,10 +21,12 @@
             <longflag>outputDirectory</longflag>
             <label>Output Directory</label>
             <description>directory for output frequency, mask images</description>
+            <default>/Users/jacob_kitz/Data/out</default>
         </string>
         <string>
             <longflag>inputCSVName</longflag>
             <label>path for input MTF csv</label>
+            <default>/Users/jacob_kitz/Data/test_mtf.csv</default>
         </string>
     </parameters>
 
@@ -33,28 +35,28 @@
         <description>RAS coordinates of axial in-plane airway recist diameter and slice</description>
         <float>
             <longflag>aR</longflag>
-            <label>Right coordinate of first recist point</label>
-            <default>68.4</default>
+            <label>Left coordinate of first recist point</label>
+            <default>54.4</default>
         </float>
         <float>
             <longflag>aA</longflag>
-            <label>Anterior coordinate of first recist point</label>
-            <default>142.3</default>
+            <label>Posterior coordinate of first recist point</label>
+            <default>162.2</default>
         </float>
         <float>
             <longflag>bR</longflag>
-            <label>Right coordinate of second recist point</label>
-            <default>65.7</default>
+            <label>Left coordinate of second recist point</label>
+            <default>58.9</default>
         </float>
         <float>
             <longflag>bA</longflag>
-            <label>Anterior coordinate of second recist point</label>
-            <default>137.9</default>
+            <label>Posterior coordinate of second recist point</label>
+            <default>155.3</default>
         </float>
         <integer>
             <longflag>slice</longflag>
             <label>Axial slice coordinate of airway recist diameter points</label>
-            <default>961</default>
+            <default>282</default>
         </integer>
     </parameters>
 
@@ -81,8 +83,46 @@
             <label>High modulation</label>
             <default>0.6</default>
         </float>
-
     </parameters>
 
+    <parameters>
+        <label>Output Images</label>
+        <description>Output Volume Nodes</description>
+        <image>
+            <longflag>outputF</longflag>
+            <label>Fourier Spectrum</label>
+            <channel>output</channel>
+            <description>Log magnitude of Fourier spectrum</description>
+            <default>F_spectrum.nrrd</default>
+        </image>
+        <image>
+            <longflag>outputFilterBP</longflag>
+            <label>Bandpass Filter</label>
+            <channel>output</channel>
+            <description>Bandpass filter mask in frequency domain</description>
+            <default>filter_bandpass.nrrd</default>
+        </image>
+        <image>
+            <longflag>outputFilterLP</longflag>
+            <label>Lowpass Filter</label>
+            <channel>output</channel>
+            <description>Lowpass filter mask in frequency domain</description>
+            <default>filter_lowpass.nrrd</default>
+        </image>
+        <image>
+            <longflag>outputImageBP</longflag>
+            <label>Bandpass Filtered Image</label>
+            <channel>output</channel>
+            <description>Bandpass filtered spatial domain image</description>
+            <default>image_bandpass.nrrd</default>
+        </image>
+        <image>
+            <longflag>outputImageLP</longflag>
+            <label>Lowpass Filtered Image</label>
+            <channel>output</channel>
+            <description>Lowpass filtered spatial domain image</description>
+            <default>image_lowpass.nrrd</default>
+        </image>
+    </parameters>
 
 </executable>
