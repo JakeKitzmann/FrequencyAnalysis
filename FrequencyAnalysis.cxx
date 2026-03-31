@@ -58,14 +58,7 @@ int main(int argc, char * argv []){
         return EXIT_FAILURE;
     }
 
-    std::cout << "slice: " << slice << std::endl;
-    std::cout << "aR (mult by -1): " << aR << std::endl;
-    std::cout << "aA (mult by -1): " << aA << std::endl;
-    std::cout << "bR (mult by -1): " << bR << std::endl;
-    std::cout << "bA (mult by -1): " << bA << std::endl;
-    std::cout << "roiMult: " << roiMult << std::endl;
-    
-    // read MTF for frequencies
+
     ParseMTF parseMTF(modLow, modHigh, inputCSVName);
     std::array<double, 2> frequencies = parseMTF.execute();
 
@@ -86,6 +79,20 @@ int main(int argc, char * argv []){
 
     start[2] = slice;
     size[2] = 0;
+
+    // XML arg validation
+    // physical point to index already handled by bool later
+    if (slice < 0 || slice > size[2])
+    {
+        std::cout << "ERROR: Slice not within image" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    if (modLow < 0 || modLow > 1.0 || modHigh < 0.0 || modHigh > 1.0)
+    {
+        std::cout << "ERROR: Invalid modulation" << std::endl;
+    }
+
 
     ImageType::RegionType desiredRegion;
     desiredRegion.SetIndex(start);
@@ -239,19 +246,6 @@ int main(int argc, char * argv []){
     const std::string name = fs::path(inputImageName).filename().string();
 
     out << name << ","
-    << slice << ","
-    << fxMax << "," << fyMax << ","
-    << aR << "," << aA << ","
-    << aIdx[0] << "," << aIdx[1] << ","
-    << bR << "," << bA << ","
-    << bIdx[0] << "," << bIdx[1] << ","
-    << outSize << ","
-    << bandpassE << ","
-    << lowpassE << ","
-    << energyFraction
-	<< std::endl;
-
-    std::cout << name << ","
     << slice << ","
     << fxMax << "," << fyMax << ","
     << aR << "," << aA << ","

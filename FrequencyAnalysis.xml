@@ -69,10 +69,12 @@
         <float>
             <longflag>modLow</longflag>
             <label>low modulation</label>
+            <default>0.0</default>
         </float>
         <float>
             <longflag>modHigh</longflag>
             <label>high modulation</label>
+            <default>0.0</default>
         </float>
 
     </parameters>
