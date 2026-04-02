@@ -78,3 +78,6 @@ This tool is completely free to use and publish with. If this aided your publica
 
 Jacob J. Kitzmann, BSE, The University of Iowa College of Engineering
 (add in paper citation when we get published)
+
+### To Do
+- Windows compatability?
