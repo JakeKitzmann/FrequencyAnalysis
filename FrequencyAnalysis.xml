@@ -36,27 +36,27 @@
         <float>
             <longflag>aR</longflag>
             <label>Left coordinate of first recist point</label>
-            <default>54.4</default>
+            <default>64.1</default>
         </float>
         <float>
             <longflag>aA</longflag>
             <label>Posterior coordinate of first recist point</label>
-            <default>162.2</default>
+            <default>180.1</default>
         </float>
         <float>
             <longflag>bR</longflag>
             <label>Left coordinate of second recist point</label>
-            <default>58.9</default>
+            <default>65.2</default>
         </float>
         <float>
             <longflag>bA</longflag>
             <label>Posterior coordinate of second recist point</label>
-            <default>155.3</default>
+            <default>171.2</default>
         </float>
         <integer>
             <longflag>slice</longflag>
             <label>Axial slice coordinate of airway recist diameter points</label>
-            <default>282</default>
+            <default>453</default>
         </integer>
     </parameters>
 
@@ -88,6 +88,18 @@
     <parameters>
         <label>Output Images</label>
         <description>Output Volume Nodes</description>
+        <boolean>
+            <longflag>outputImages</longflag>
+            <label>Output Images: </label>
+            <default>false</default>
+        </boolean>
+        <image>
+            <longflag>roi</longflag>
+            <label>Region of Interest</label>
+            <channel>output</channel>
+            <description>Region of interest</description>
+            <default>roi.nrrd</default>
+        </image>
         <image>
             <longflag>outputF</longflag>
             <label>Fourier Spectrum</label>

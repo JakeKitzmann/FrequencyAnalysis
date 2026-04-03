@@ -115,7 +115,7 @@ int main(int argc, char * argv []){
     // multiply by -1 for ras -> lps
     SliceType::IndexType aIdx;
     SliceType::PointType a;
-    a[0] = -1 * aR;
+    a[0] = aR;
     a[1] = -1 * aA;
     bool oob = sliceImage->TransformPhysicalPointToIndex(a, aIdx);
     if(!oob)
@@ -128,7 +128,7 @@ int main(int argc, char * argv []){
 
     SliceType::IndexType bIdx;
     SliceType::PointType b;
-    b[0] = -1 * bR;
+    b[0] = bR;
     b[1] = -1 * bA;
     oob = sliceImage->TransformPhysicalPointToIndex(b, bIdx);
     if(!oob)
@@ -140,6 +140,11 @@ int main(int argc, char * argv []){
     // get slice roi
     RecistROI recistROI(sliceImage, aIdx[0], aIdx[1], bIdx[0], bIdx[1], roiMult);
     SliceType::Pointer f = recistROI.execute();
+
+    if (outputImages) {
+        WriteImageT<Float2D>(f, roi);
+
+    }
 
     // ensure fft compatability
     FFTCompatable fftCompatable(f);
@@ -260,11 +265,13 @@ int main(int argc, char * argv []){
     << energyFraction
 	<< std::endl;
 
-    WriteImageT<Float2D>(logFilter->GetOutput(), outputF);
-    WriteImageT<Float2D>(bandpass,               outputFilterBP);
-    WriteImageT<Float2D>(lowpass,                outputFilterLP);
-    WriteImageT<Float2D>(fBandpassFiltered,      outputImageBP);
-    WriteImageT<Float2D>(fLowpassFiltered,       outputImageLP);
+    if (outputImages) {
+        WriteImageT<Float2D>(logFilter->GetOutput(), outputF);
+        WriteImageT<Float2D>(bandpass,               outputFilterBP);
+        WriteImageT<Float2D>(lowpass,                outputFilterLP);
+        WriteImageT<Float2D>(fBandpassFiltered,      outputImageBP);
+        WriteImageT<Float2D>(fLowpassFiltered,       outputImageLP);
+    }
 
     return EXIT_SUCCESS;
 }
