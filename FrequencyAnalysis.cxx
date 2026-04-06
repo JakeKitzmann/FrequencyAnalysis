@@ -48,17 +48,6 @@ int main(int argc, char * argv []){
 
     PARSE_ARGS;
 
-    fs::path outDir(outputDirectory);
-    std::error_code ec;
-    fs::create_directories(outDir, ec);
-
-    if (ec) {
-        std::cerr << "Failed to create output directory: " << outDir
-                  << " : " << ec.message() << "\n";
-        return EXIT_FAILURE;
-    }
-
-
     ParseMTF parseMTF(modLow, modHigh, inputCSVName);
     std::array<double, 2> frequencies = parseMTF.execute();
 
@@ -106,16 +95,18 @@ int main(int argc, char * argv []){
     extractor->SetExtractionRegion(desiredRegion);
     extractor->SetDirectionCollapseToSubmatrix();
 
+	std::cout << "about to extract slice" << std::endl;
     extractor->Update();
     SliceType::Pointer sliceImage = extractor->GetOutput();
     sliceImage->DisconnectPipeline();
+	std::cout << "extracted slice" << std::endl;
 
     // convert to slice index
     // note that we don't need S because it's a 2D image now
     // multiply by -1 for ras -> lps
     SliceType::IndexType aIdx;
     SliceType::PointType a;
-    a[0] = aR;
+    a[0] = -1 * aR;
     a[1] = -1 * aA;
     bool oob = sliceImage->TransformPhysicalPointToIndex(a, aIdx);
     if(!oob)
@@ -128,7 +119,7 @@ int main(int argc, char * argv []){
 
     SliceType::IndexType bIdx;
     SliceType::PointType b;
-    b[0] = bR;
+    b[0] = -1 * bR;
     b[1] = -1 * bA;
     oob = sliceImage->TransformPhysicalPointToIndex(b, bIdx);
     if(!oob)
@@ -240,7 +231,7 @@ int main(int argc, char * argv []){
     const double fyMax = 0.5 / f->GetSpacing()[1]; 
 
     // output results
-    std::ofstream out((outDir / "stats.csv").string());
+	std::ofstream out(outPath);
 
     if( !out.is_open()){
         return 1;
