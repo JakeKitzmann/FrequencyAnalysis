@@ -81,3 +81,4 @@ Jacob J. Kitzmann, BSE, The University of Iowa College of Engineering
 
 ### To Do
 - Windows compatability?
+- Run w/o MTF curve (given spatial frequencies)
