@@ -4,32 +4,18 @@ project(FrequencyAnalysis LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# sem
-set(BUILD_TESTING OFF)
-
-# dummy GTest exports bc argon is wierd
-# add_library(GTest::GTest INTERFACE IMPORTED)
-# add_library(GTest::Main INTERFACE IMPORTED)
-
 find_package(SlicerExecutionModel REQUIRED GenerateCLP)
 include(${GenerateCLP_USE_FILE})
 include(${SlicerExecutionModel_USE_FILE})
-set(FrequencyAnalysis_SOURCE FrequencyAnalysis.cxx)
-GENERATECLP(FrequencyAnalysis_SOURCE FrequencyAnalysis.xml)
 
-# itk
-set(MINIMUM_ITK_VERSION 5.0)
 find_package(ITK REQUIRED)
 include(${ITK_USE_FILE})
 
-# sem executable
+# The macro creates FrequencyAnalysisLib from ADDITIONAL_SRCS internally,
+# then wraps it in the FrequencyAnalysis executable for Slicer.
 SEMMacroBuildCLI(
-        NAME FrequencyAnalysis
-
-        SRCS
-        ${FrequencyAnalysis_SOURCE}
-
-        ADDITIONAL_SRCS
+    NAME FrequencyAnalysis
+    ADDITIONAL_SRCS
         src/RecistROI.cxx
         src/FFTCompatable.cxx
         src/HannWindow.cxx
@@ -38,9 +24,15 @@ SEMMacroBuildCLI(
         src/LowPassFilter.cxx
         src/ImageEnergy.cxx
         src/ParseMTF.cxx
-
-        TARGET_LIBRARIES
+    TARGET_LIBRARIES
         ${ITK_LIBRARIES}
-#        png
-#        z
 )
+
+# Expose headers to tests via the macro-created lib target
+target_include_directories(FrequencyAnalysisLib PUBLIC ${CMAKE_SOURCE_DIR})
+
+option(BUILD_TESTING "Build tests" ON)
+if(BUILD_TESTING)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
