@@ -7,7 +7,15 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 add_executable(test_HannWindow test_HannWindow.cxx)
-target_link_libraries(test_HannWindow
+add_executable(test_FFTShift test_FFTShift.cxx)
+target_link_libraries(
+    test_HannWindow
+    PRIVATE
+    FrequencyAnalysisLib
+    GTest::gtest_main
+)
+
+target_link_libraries(test_FFTShift
     PRIVATE
     FrequencyAnalysisLib
     GTest::gtest_main
@@ -15,3 +23,4 @@ target_link_libraries(test_HannWindow
 
 include(GoogleTest)
 gtest_discover_tests(test_HannWindow)
+gtest_discover_tests(test_FFTShift)
