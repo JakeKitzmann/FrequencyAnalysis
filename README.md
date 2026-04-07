@@ -39,34 +39,30 @@ SlicerExecutionModel
 
 C++ 17 Compiler
 
-## Setup 
+## Setup
 
+```bash
 git clone https://github.com/username/ResampleFromImage
-
 cd ResampleFromImage
-
 mkdir build
-
 cd build
-
 cmake ..
-
 make
+```
 
-### Note on CMakeLists.txt
+## Development Setup
 
-Due to use in UIowa's Argon HPC cluster, lines for ignoring GTest, and some includes are included in
-CMakeLists.txt
+After cloning, install the pre-commit hook to automatically run tests before each commit:
 
-To run you may need to comment out:
+```bash
+sh scripts/setup-hooks.sh
+```
 
-add_library(GTest::GTest INTERFACE IMPORTED)
+Tests are built by default. To skip them:
 
-add_library(GTest::Main INTERFACE IMPORTED)
-
-png
-
-z
+```bash
+cmake .. -DBUILD_TESTING=OFF
+```
 
 ## Executable
 
@@ -82,4 +78,4 @@ Jacob J. Kitzmann, BSE, The University of Iowa College of Engineering
 ### To Do
 - Windows compatability?
 - Run w/o MTF curve (given spatial frequencies)
-- Test driven development -- incorporate unit tests to run after changes.
+- ~~Test driven development -- incorporate unit tests to run after changes.~~
