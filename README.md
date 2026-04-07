@@ -72,6 +72,7 @@ Jacob J. Kitzmann, BSE — The University of Iowa College of Engineering
 *(publication citation pending)*
 
 ## To Do
+- Figure out why RAS / LPS is inconsistent across platforms
 - Windows compatibility
 - Run without MTF curve (user-specified spatial frequencies)
 - ~~Test driven development~~
