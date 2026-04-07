@@ -95,11 +95,9 @@ int main(int argc, char * argv []){
     extractor->SetExtractionRegion(desiredRegion);
     extractor->SetDirectionCollapseToSubmatrix();
 
-	std::cout << "about to extract slice" << std::endl;
     extractor->Update();
     SliceType::Pointer sliceImage = extractor->GetOutput();
     sliceImage->DisconnectPipeline();
-	std::cout << "extracted slice" << std::endl;
 
     // convert to slice index
     // note that we don't need S because it's a 2D image now
