@@ -248,32 +248,15 @@ int main(int argc, char * argv []){
 
     // get magnitude of fourier spectrum for visualization
     using MagnitudeFilter = itk::ComplexToModulusImageFilter<Complex2D, Float2D>;
-    using AddImageFilter = itk::AddImageFilter<Float2D>;
-    using LogFilter = itk::LogImageFilter<Float2D, Float2D>;
-
     auto magnitudeFilter = MagnitudeFilter::New();
     magnitudeFilter->SetInput(F);
+    using AddImageFilter = itk::AddImageFilter<Float2D>;
     auto addFilter = AddImageFilter::New();
     addFilter->SetInput(magnitudeFilter->GetOutput());
     addFilter->SetConstant(1e-6f);
+    using LogFilter = itk::LogImageFilter<Float2D, Float2D>;
     auto logFilter = LogFilter::New();
     logFilter->SetInput(addFilter->GetOutput());
-
-    auto magnitudeFilterBP = MagnitudeFilter::New();
-    magnitudeFilterBP->SetInput(FBandpassFiltered);
-    auto addFilterBP = AddImageFilter::New();
-    addFilterBP->SetInput(magnitudeFilterBP->GetOutput());
-    addFilterBP->SetConstant(1e-6f);
-    auto logFilterBP = LogFilter::New();
-    logFilterBP->SetInput(addFilterBP->GetOutput());
-
-    auto magnitudeFilterLP = MagnitudeFilter::New();
-    magnitudeFilterLP->SetInput(FLowpassFiltered);
-    auto addFilterLP = AddImageFilter::New();
-    addFilterLP->SetInput(magnitudeFilterLP->GetOutput());
-    addFilterLP->SetConstant(1e-6f);
-    auto logFilterLP = LogFilter::New();
-    logFilterLP->SetInput(addFilterLP->GetOutput());
 
 
 	const double fxMax = 0.5 / f->GetSpacing()[0];
@@ -311,9 +294,9 @@ int main(int argc, char * argv []){
 
     if (outputImages) {
         if (debug) std::cout << "[37] Writing output images" << std::endl;
-        WriteImageT<Float2D>(logFilter->GetOutput(),   outputF);
-        WriteImageT<Float2D>(logFilterBP->GetOutput(), outputFilterBP);
-        WriteImageT<Float2D>(logFilterLP->GetOutput(), outputFilterLP);
+        WriteImageT<Float2D>(logFilter->GetOutput(), outputF);
+        WriteImageT<Float2D>(bandpass,               outputFilterBP);
+        WriteImageT<Float2D>(lowpass,                outputFilterLP);
         WriteImageT<Float2D>(fBandpassFiltered,      outputImageBP);
         WriteImageT<Float2D>(fLowpassFiltered,       outputImageLP);
         if (debug) std::cout << "[38] Output images written" << std::endl;

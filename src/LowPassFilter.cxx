@@ -22,7 +22,7 @@ Float2D::Pointer LowPassFilter::execute()
     const long Nu = static_cast<long>(frequencySize[0]);
     const long Nv = static_cast<long>(frequencySize[1]);
         
-    const long u0 = Nu / 2;
+    const long u0 = Nu - 1;  // DC is at last column after pre-FFT (-1)^(x+y) shift
     const long v0 = Nv / 2;
 
     auto lowpass = Float2D::New();
@@ -38,7 +38,7 @@ Float2D::Pointer LowPassFilter::execute()
         const double x = static_cast<double>(idx[0] - frequencyIndex[0]); // pixel coordinates
         const double y = static_cast<double>(idx[1] - frequencyIndex[1]);
 
-        const double u = (static_cast<double>(x) - u0) / (static_cast<double>(Nu) * dx);
+        const double u = (static_cast<double>(x) - u0) / (2.0 * static_cast<double>(Nu - 1) * dx);
         const double v = (static_cast<double>(y) - v0) / (static_cast<double>(Nv) * dy);
 
         const double R = std::sqrt(u*u + v*v); // radial distance to center
