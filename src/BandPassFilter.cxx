@@ -22,7 +22,7 @@ Float2D::Pointer BandPassFilter::execute()
     const long Nu = static_cast<long>(frequencySize[0]);
     const long Nv = static_cast<long>(frequencySize[1]);
         
-    const long u0 = Nu - 1;  // DC is at last column after pre-FFT (-1)^(x+y) shift
+    const long u0 = Nu / 2;
     const long v0 = Nv / 2;
 
     auto bandpass = Float2D::New();
@@ -41,7 +41,7 @@ Float2D::Pointer BandPassFilter::execute()
         const double y = static_cast<double>(idx[1] - frequencyIndex[1]);
 
         // cycles/mm
-        const double u = (x - u0) / (2.0 * static_cast<double>(Nu - 1) * dx);
+        const double u = (x - u0) / (static_cast<double>(Nu) * dx);
         const double v = (y - v0) / (static_cast<double>(Nv) * dy);
 
         const double R = std::sqrt(u*u + v*v);
