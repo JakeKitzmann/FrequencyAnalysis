@@ -86,6 +86,16 @@
     </parameters>
 
     <parameters>
+        <label>Debug</label>
+        <description>Debugging options</description>
+        <boolean>
+            <longflag>debug</longflag>
+            <label>Debug: </label>
+            <default>false</default>
+        </boolean>
+    </parameters>
+
+    <parameters>
         <label>Output Images</label>
         <description>Output Volume Nodes</description>
         <boolean>
