@@ -1,6 +1,6 @@
 # FrequencyAnalysis
 
-A 3D Slicer extension for extracting spatial frequency information from medical images. Given an airway RECIST measurement and a CT scan, it computes the energy fraction in a frequency band defined by an MTF curve — useful for characterizing lung tissue, airways, and other small structures.
+A 3D Slicer extension for extracting spatial frequency information from medical images. Given an airway RECIST measurement and a CT scan, it computes the energy fraction in a frequency band defined by an MTF curve — useful for characterizing lung tissue, airways, and other small structures. This is currently used for partial volume averaging quantification in CT.
 
 ## Requirements
 
