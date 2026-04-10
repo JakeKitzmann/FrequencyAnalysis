@@ -27,8 +27,6 @@ The executable will be at `build/bin/FrequencyAnalysis`.
 FrequencyAnalysis --inputImageName <path> --inputCSVName <path> --outPath <path> [options]
 ```
 
--
-
 ### Arguments
 
 | Flag | Type | Description |
