@@ -3,3 +3,4 @@ call/logs/
 *.nii.gz
 *.nrrd
 *.dcm
+*.idea*
